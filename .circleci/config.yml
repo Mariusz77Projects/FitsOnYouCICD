@@ -3,16 +3,18 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+version: 2.1
+
 trigger:
 - none
 
 variables:
-  IISWebsiteName: 'AzureTestProject'
+  IISWebsiteName: 'FitsOnYou'
 
 resources:
  pipelines:
      - pipeline: 'buildPipeline'
-       project: 'AzureTestProject'
+       project: 'FitsOnYou'
        source: 'Build pipeline'
        branch: 'main'
 
@@ -25,7 +27,7 @@ stages:
     jobs:
     - deployment: DeployWebsite
       displayName: 'Deploy website'
-      environment: 'Windows 11 server.DAVE'
+      environment: 'Windows 11 server.MARIUSZ'
       strategy:
        runOnce:
            deploy:
@@ -35,7 +37,7 @@ stages:
                 - download: 'buildPipeline'
                   name: 'DownloadBuildArtifacts'
                   displayName: 'Download Build Artifacts'
-                  artifact: 'AzureTestProject'
+                  artifact: 'FitsOnYou'
                 
                 - task: IISWebAppManagementOnMachineGroup@0
                   name: 'StopIIS'
